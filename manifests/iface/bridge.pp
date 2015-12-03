@@ -201,9 +201,14 @@ define debnet::iface::bridge(
 
   if size($ports) > 0 {
     $brports = join($ports, ' ')
-    debnet::iface { $ports:
-      method   => 'manual',
-      tx_queue => $tx_queue,
+
+    $ports.each |$index, $port| {
+      if(!defined(Debnet::Iface[ $port ])) {
+        debnet::iface { $port:
+          method   => 'manual',
+          tx_queue => $tx_queue,
+        }
+      }
     }
   } else {
     $brports = 'none'

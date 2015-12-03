@@ -188,7 +188,7 @@ define debnet::iface::bond(
   }
   validate_re($mode,
     '^balance\-rr$|^active\-backup$|^balance\-xor$|^broadcast$|^802\.3ad$|^balance\-tlb$|^balance\-alb$')
-  validate_re($miimon, '^\d+$')
+  validate_integer($miimon)
   $bondopts0 = {
       'bond-slaves'  => 'none',
       'bond-primary' => $ports[1],
@@ -198,14 +198,14 @@ define debnet::iface::bond(
 
   validate_bool($use_carrier)
   if $updelay {
-    validate_re($updelay, '^\d+$')
+    validate_integer($updelay)
     $bondopts1 = {'bond-updelay' => $updelay}
   } else {
     $bondopts1 = {}
   }
 
   if $downdelay {
-    validate_re($downdelay, '^\d+$')
+    validate_integer($downdelay)
     $bondopts2 = {'bond-downdelay' => $downdelay}
   } else {
     $bondopts2 = {}

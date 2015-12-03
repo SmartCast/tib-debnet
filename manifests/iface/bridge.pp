@@ -222,31 +222,31 @@ define debnet::iface::bridge(
   $bropts2 = {'bridge_stp' => $stp ? { true => 'on', default => 'off'} }
   if $stp {
     if $prio {
-      validate_re($prio, '^\d+$')
+      validate_integer($prio)
       $bropts3 = { 'bridge_bridgeprio' => $prio}
     } else {
       $bropts3 = {}
     }
     if $fwdelay {
-      validate_re($fwdelay, '^\d+$')
+      validate_integer($fwdelay)
       $bropts4 = { 'bridge_fd' => $fwdelay }
     } else {
       $bropts4 = {}
     }
     if $hello {
-      validate_re($hello, '^\d+$')
+      validate_integer($hello)
       $bropts5 = { 'bridge_hello' => $hello }
     } else {
       $bropts5 = {}
     }
     if $maxage {
-      validate_re($maxage, '^\d+$')
+      validate_integer($maxage)
       $bropts6 = { 'bridge_maxage' => $maxage }
     } else {
       $bropts6 = {}
     }
     if $maxwait {
-      validate_re($maxwait, '^\d+$')
+      validate_integer($maxwait)
       $bropts7 = { 'bridge_maxwait' => $maxwait }
     } else {
       $bropts7 = {}

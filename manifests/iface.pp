@@ -178,7 +178,7 @@ define debnet::iface (
   validate_array($downs)
   validate_array($post_downs)
   if $tx_queue {
-    validate_re($tx_queue, '^\d+$')
+    validate_integer($tx_queue)
   }
   if $routes {
     validate_hash($routes)
@@ -205,8 +205,8 @@ define debnet::iface (
       }
       if $hostname { validate_re($hostname,
         '^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$') }
-      if $metric { validate_re($metric, '^\d+$') }
-      if $leasetime { validate_re($leasetime, '^\d+$') }
+      if $metric { validate_integer($metric) }
+      if $leasetime { validate_integer($leasetime) }
       if $vendor { validate_string($vendor) }
       if $client { validate_string($client) }
       if $hwaddress {
@@ -229,7 +229,7 @@ define debnet::iface (
       if $broadcast {
         validate_re($broadcast, '^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[+-]$')
       }
-      if $metric { validate_re($metric, '^\d+$') }
+      if $metric { validate_integer($metric) }
       if $gateway { validate_re($gateway, '(:?[0-9]{1,3}\.){3}[0-9]{1,3}$') }
       if $pointopoint {
         validate_re($pointopoint, '(:?[0-9]{1,3}\.){3}[0-9]{1,3}$')
@@ -237,7 +237,7 @@ define debnet::iface (
       if $hwaddress {
         validate_re($hwaddress, '^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$')
       }
-      if $mtu { validate_re($mtu, '^\d+$') }
+      if $mtu { validate_integer($mtu) }
       if $scope { validate_re($scope, '^global$|^link$|^host$') }
 
       concat::fragment { "${ifname}_stanza":

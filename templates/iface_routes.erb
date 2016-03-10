@@ -1,5 +1,9 @@
 <% @routes.keys.sort.each do |k| -%>
+  <%- if (@routes[k])[0,2].eql?("em") or (@routes[k])[0,3].eql?("eth") -%>
+  up ip route add <%= k -%> dev <%= @routes[k] %>
+  <%- else -%>
   up ip route add <%= k -%> via <%= @routes[k] %>
+  <%- end -%>
 <% end -%>
 <% @routes.keys.sort.each do |k| -%>
   down ip route del <%= k %>

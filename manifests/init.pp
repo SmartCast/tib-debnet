@@ -41,7 +41,7 @@ class debnet {
     ensure => 'installed',
   }
 
-  concat { $params::interfaces_file :
+  concat { $debnet::params::interfaces_file :
     owner          => 'root',
     group          => 'root',
     mode           => '0644',
@@ -49,7 +49,7 @@ class debnet {
   }
 
   concat::fragment { 'interfaces_header':
-    target  => $params::interfaces_file,
+    target  => $debnet::params::interfaces_file,
     content => template('debnet/header.erb'),
     order   => 01,
   }
